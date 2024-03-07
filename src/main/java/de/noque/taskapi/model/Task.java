@@ -4,11 +4,15 @@ import de.noque.taskapi.model.enums.Label;
 import de.noque.taskapi.model.enums.Priority;
 import de.noque.taskapi.model.enums.Status;
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
 @Entity(name = "Tasks")
+@Data
+@NoArgsConstructor
 public class Task {
 
     @Id
@@ -33,8 +37,6 @@ public class Task {
     @CreationTimestamp
     private LocalDateTime TimeCreated;
 
-    public Task() {}
-
     public Task( Label label, String task, Status status, Priority priority) {
         this.TaskNumber = "TASK-" + this.Id;
         this.Label = label;
@@ -42,54 +44,4 @@ public class Task {
         this.Status = status;
         this.Priority = priority;
     }
-
-    //<editor-fold desc="Getter & Setter">
-    public Long getId() {
-        return Id;
-    }
-
-    public String getTaskNumber() {
-        return TaskNumber;
-    }
-
-    public void setTaskNumber(String taskNumber) {
-        TaskNumber = taskNumber;
-    }
-
-    public de.noque.taskapi.model.enums.Label getLabel() {
-        return Label;
-    }
-
-    public void setLabel(de.noque.taskapi.model.enums.Label label) {
-        Label = label;
-    }
-
-    public String getTask() {
-        return Task;
-    }
-
-    public void setTask(String task) {
-        Task = task;
-    }
-
-    public de.noque.taskapi.model.enums.Status getStatus() {
-        return Status;
-    }
-
-    public void setStatus(de.noque.taskapi.model.enums.Status status) {
-        Status = status;
-    }
-
-    public de.noque.taskapi.model.enums.Priority getPriority() {
-        return Priority;
-    }
-
-    public void setPriority(de.noque.taskapi.model.enums.Priority priority) {
-        Priority = priority;
-    }
-
-    public LocalDateTime getTimeCreated() {
-        return TimeCreated;
-    }
-    //</editor-fold>
 }
