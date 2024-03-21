@@ -17,31 +17,35 @@ public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
-    private String TaskNumber;
-
-    @Column(nullable = false)
-    private Label Label;
+    private String taskNumber;
 
     @Column(nullable = false)
-    private String Task;
+    private Label label;
 
     @Column(nullable = false)
-    private Status Status;
+    private String task;
 
     @Column(nullable = false)
-    private Priority Priority;
+    private Status status;
+
+    @Column(nullable = false)
+    private Priority priority;
 
     @Column(nullable = false)
     @CreationTimestamp
-    private LocalDateTime TimeCreated;
+    private LocalDateTime timeCreated;
 
     public Task( Label label, String task, Status status, Priority priority) {
-        this.TaskNumber = "TASK-" + this.Id;
-        this.Label = label;
-        this.Task = task;
-        this.Status = status;
-        this.Priority = priority;
+        this.label = label;
+        this.task = task;
+        this.status = status;
+        this.priority = priority;
+    }
+
+    @PostPersist
+    public void setTaskNumber() {
+        this.taskNumber = "TASK-" + this.id;
     }
 }

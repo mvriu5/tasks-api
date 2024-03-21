@@ -22,11 +22,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Task get(Long id) {
-        Optional<Task> task = taskRepository.findById(id);
-
-        if (task.isEmpty()) throw new TaskNotFoundException(id);
-
-        return task.get();
+        return taskRepository.findById(id).orElseThrow(() -> new TaskNotFoundException(id));
     }
 
     @Override
@@ -41,25 +37,20 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Task update(Long id, Task task) {
-        Optional<Task> taskDb = taskRepository.findById(id);
+        Task taskDb = get(id);
 
-        if (taskDb.isEmpty()) throw new TaskNotFoundException(id);
+        taskDb.setTask(task.getTask());
+        taskDb.setTaskNumber(task.getTaskNumber());
+        taskDb.setLabel(task.getLabel());
+        taskDb.setPriority(task.getPriority());
+        taskDb.setStatus(task.getStatus());
 
-        taskDb.get().setTask(task.getTask());
-        taskDb.get().setTaskNumber(task.getTaskNumber());
-        taskDb.get().setLabel(task.getLabel());
-        taskDb.get().setPriority(task.getPriority());
-        taskDb.get().setStatus(task.getStatus());
-
-        return taskRepository.save(taskDb.get());
+        return taskRepository.save(taskDb);
     }
 
     @Override
     public void delete(Long id) {
-        Optional<Task> task = taskRepository.findById(id);
-
-        if (task.isEmpty()) throw new TaskNotFoundException(id);
-
+        get(id);
         taskRepository.deleteById(id);
     }
 }
