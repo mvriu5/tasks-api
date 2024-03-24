@@ -8,7 +8,7 @@ public interface ProjectService {
 
     Project get(Long id);
 
-    List<Project> getByUser(Long id);
+    List<Project> getByParentUser(Long id);
 
     Project create(Project project);
 

@@ -26,8 +26,8 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public List<Project> getByUser(Long userId) {
-        return projectRepository.findByUserId(userId).orElseThrow(() -> new ProjectNotFoundException(userId, new User()));
+    public List<Project> getByParentUser(Long parentUserId) {
+        return projectRepository.findByParentUserId(parentUserId).orElseThrow(() -> new ProjectNotFoundException(parentUserId, new User()));
     }
 
     @Override
@@ -40,7 +40,7 @@ public class ProjectServiceImpl implements ProjectService {
         Project projectDb = get(id);
 
         projectDb.setName(project.getName());
-        projectDb.setUserId(project.getUserId());
+        projectDb.setParentUserId(project.getParentUserId());
         projectDb.setDescription(project.getDescription());
         projectDb.setTimeCreated(project.getTimeCreated());
 

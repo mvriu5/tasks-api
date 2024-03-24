@@ -2,8 +2,6 @@ package de.noque.taskapi.service;
 
 import de.noque.taskapi.model.User;
 
-import java.util.List;
-
 public interface UserService {
 
     User get(Long id);

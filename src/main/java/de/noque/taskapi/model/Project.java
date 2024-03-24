@@ -20,7 +20,7 @@ public class Project {
     private String name;
 
     @Column(nullable = false)
-    private Long userId;
+    private Long parentUserId;
 
     private String description;
 
@@ -28,9 +28,9 @@ public class Project {
     @CreationTimestamp
     private LocalDateTime timeCreated;
 
-    public Project(String name, String description, Long userId) {
+    public Project(String name, String description, Long parentUserId) {
         this.name = name;
         this.description = description;
-        this.userId = userId;
+        this.parentUserId = parentUserId;
     }
 }

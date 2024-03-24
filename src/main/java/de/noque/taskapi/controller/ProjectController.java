@@ -5,6 +5,8 @@ import de.noque.taskapi.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequestMapping(path = "/api/project")
 @RestController
 public class ProjectController {
@@ -21,9 +23,9 @@ public class ProjectController {
         return projectService.get(id);
     }
 
-    @GetMapping("/user/{userId}")
-    public Project getProjectByUser(@PathVariable("userId") Long userId) {
-        return projectService.get(userId);
+    @GetMapping("/user/{parentUserId}")
+    public List<Project> getProjectByParentUser(@PathVariable("parentUserId") Long parentUserId) {
+        return projectService.getByParentUser(parentUserId);
     }
 
     @PostMapping("/create")

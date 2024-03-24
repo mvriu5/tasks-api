@@ -10,5 +10,5 @@ import java.util.Optional;
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, Long> {
 
-    Optional<List<Project>> findByUserId(Long userId);
+    Optional<List<Project>> findByParentUserId(Long parentUserId);
 }

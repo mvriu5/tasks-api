@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "Users")
 @Data
@@ -28,14 +30,18 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @ElementCollection
+    private List<Long> projectIds = new ArrayList<>();;
+
     @Column(nullable = false)
     @CreationTimestamp
     private LocalDateTime timeCreated;
 
-    public User(String name, String email, String username, String password, Long teamId) {
+    public User(String name, String email, String username, String password, List<Long> projectIds) {
         this.name = name;
         this.email = email;
         this.username = username;
         this.password = password;
+        this.projectIds = projectIds != null ? new ArrayList<>(projectIds) : new ArrayList<>();
     }
 }
