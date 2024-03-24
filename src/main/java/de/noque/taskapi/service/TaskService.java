@@ -8,7 +8,11 @@ public interface TaskService {
 
     Task get(Long id);
 
-    List<Task> getAll();
+    Task get(String taskNumber);
+
+    List<Task> getByProject(Long projectId);
+
+    List<Task> getByUser(Long userId);
 
     Task create(Task task);
 

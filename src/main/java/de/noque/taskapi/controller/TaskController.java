@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RequestMapping(path = "/task")
+@RequestMapping(path = "/api/task")
 @RestController
 public class TaskController {
 
@@ -29,9 +29,19 @@ public class TaskController {
         return taskService.get(id);
     }
 
-    @GetMapping
-    public List<Task> getAllTasks() {
-        return taskService.getAll();
+    @GetMapping("/{taskNumber}")
+    public Task getTask(@PathVariable("taskNumber") String taskNumber) {
+        return taskService.get(taskNumber);
+    }
+
+    @GetMapping("/project/{projectId}")
+    public List<Task> getTaskByProject(@PathVariable("projectId") Long projectId) {
+        return taskService.getByProject(projectId);
+    }
+
+    @GetMapping("/user/{userId}")
+    public List<Task> getTaskByUser(@PathVariable("userId") Long userId) {
+        return taskService.getByUser(userId);
     }
 
     @PostMapping("/create")
