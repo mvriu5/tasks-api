@@ -19,13 +19,15 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToOne
     @Column(nullable = false)
-    private Long userId;
+    private User user;
 
     private String taskNumber;
 
+    @ManyToOne
     @Column(nullable = false)
-    private Long projectId;
+    private Project project;
 
     @Column(nullable = false)
     private String title;
@@ -45,9 +47,9 @@ public class Task {
     @CreationTimestamp
     private LocalDateTime timeCreated;
 
-    public Task(Long userId, Long projectId, String title, String description, Label label, Status status, Priority priority) {
-        this.userId = userId;
-        this.projectId = projectId;
+    public Task(User user, Project project, String title, String description, Label label, Status status, Priority priority) {
+        this.user = user;
+        this.project = project;
         this.title = title;
         this.description = description;
         this.label = label;

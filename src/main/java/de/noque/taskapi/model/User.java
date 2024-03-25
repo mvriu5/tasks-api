@@ -7,7 +7,9 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity(name = "Users")
 @Data
@@ -30,18 +32,18 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @ElementCollection
-    private List<Long> projectIds = new ArrayList<>();;
+    @OneToMany
+    private Set<Project> projects = new HashSet<>();;
 
     @Column(nullable = false)
     @CreationTimestamp
     private LocalDateTime timeCreated;
 
-    public User(String name, String email, String username, String password, List<Long> projectIds) {
+    public User(String name, String email, String username, String password, Set<Project> projects) {
         this.name = name;
         this.email = email;
         this.username = username;
         this.password = password;
-        this.projectIds = projectIds != null ? new ArrayList<>(projectIds) : new ArrayList<>();
+        this.projects = projects != null ? new HashSet<>(projects) : new HashSet<>();
     }
 }

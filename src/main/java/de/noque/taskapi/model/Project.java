@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "Projects")
 @Data
@@ -19,18 +21,27 @@ public class Project {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
-    private Long parentUserId;
-
     private String description;
+
+    @OneToOne
+    @Column(nullable = false)
+    private User creator;
+
+    @ManyToMany
+    private Set<User> users = new HashSet<>();
+
+    @OneToMany
+    private Set<Task> tasks = new HashSet<>();
 
     @Column(nullable = false)
     @CreationTimestamp
     private LocalDateTime timeCreated;
 
-    public Project(String name, String description, Long parentUserId) {
+    public Project(String name, String description, User creator, Set<User> users, Set<Task> tasks) {
         this.name = name;
         this.description = description;
-        this.parentUserId = parentUserId;
+        this.creator = creator;
+        this.users = users;
+        this.tasks = tasks;
     }
 }
