@@ -32,18 +32,14 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @OneToMany
-    private Set<Project> projects = new HashSet<>();;
-
     @Column(nullable = false)
     @CreationTimestamp
     private LocalDateTime timeCreated;
 
-    public User(String name, String email, String username, String password, Set<Project> projects) {
+    public User(String name, String email, String username, String password) {
         this.name = name;
         this.email = email;
         this.username = username;
         this.password = password;
-        this.projects = projects != null ? new HashSet<>(projects) : new HashSet<>();
     }
 }

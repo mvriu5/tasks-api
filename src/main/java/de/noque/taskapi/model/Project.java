@@ -19,15 +19,14 @@ public class Project {
     private Long id;
 
     @Column(nullable = false)
+    private Long creatorId;
+
+    @Column(nullable = false)
     private String name;
 
     private String description;
 
-    @OneToOne
-    @Column(nullable = false)
-    private User creator;
-
-    @ManyToMany
+    @OneToMany
     private Set<User> users = new HashSet<>();
 
     @OneToMany
@@ -37,10 +36,10 @@ public class Project {
     @CreationTimestamp
     private LocalDateTime timeCreated;
 
-    public Project(String name, String description, User creator, Set<User> users, Set<Task> tasks) {
+    public Project(Long creatorId, String name, String description, Set<User> users, Set<Task> tasks) {
+        this.creatorId = creatorId;
         this.name = name;
         this.description = description;
-        this.creator = creator;
         this.users = users;
         this.tasks = tasks;
     }
